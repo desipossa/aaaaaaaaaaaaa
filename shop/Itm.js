@@ -97,6 +97,8 @@ const Itm = ({ shopList, cart, setCart, bookList }) => {
                 ...cart,
                 {
                   id: matchItm.no,
+                  title: matchItm.ebk_nm,
+                  des: matchItm.cn_intro,
                   e: 1,
                 },
               ]);
@@ -109,7 +111,9 @@ const Itm = ({ shopList, cart, setCart, bookList }) => {
             <Link to="/list">back</Link>
           </button>
           <button className="btp">
-            대여 가능 인원 수: 10 명
+            대여 가능 인원 수: {
+              matchItm.rsvt_noppl > 10 ? 0 : 10 - matchItm.rsvt_noppl
+            } 명
           </button>
         </div>
       </div>

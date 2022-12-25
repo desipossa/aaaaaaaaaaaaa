@@ -105,23 +105,25 @@ const List = ({ bookList }) => {
                 {cateList.map((it, idx) => {
                     return (
                         <figure>
-                            <div className="box">
-                                <img
-                                    src={
-                                        process.env.PUBLIC_URL +
-                                        "/assets/images/main_best0" +
-                                        (it.no + 1) +
-                                        ".jpg"
-                                    }
-                                    alt=""
-                                />
-                            </div>
+                            <Link to={"/Item/" + it.no}>
+                                <div className="box">
+                                    <img
+                                        src={
+                                            process.env.PUBLIC_URL +
+                                            "/assets/images/main_best0" +
+                                            (it.no + 1) +
+                                            ".jpg"
+                                        }
+                                        alt=""
+                                    />
+                                </div>
 
-                            <div className="name">{it.ebk_nm}</div>
-                            <div className="des">{it.cn_intro.substring(0, 100)} ...</div>
-                            <div className="price">
-                                <span>{it.gnr.toLocaleString()}</span>
-                            </div>
+                                <div className="name">{it.ebk_nm}</div>
+                                <div className="des">{it.cn_intro.substring(0, 100)} ...</div>
+                                <div className="price">
+                                    <span>{it.gnr.toLocaleString()}</span>
+                                </div>
+                            </Link>
                         </figure>
                     );
                 })}

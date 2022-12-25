@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { useEffect } from "react";
 import { Link } from "react-router-dom";
 
 const PTF = [
@@ -60,15 +61,19 @@ const PTF = [
 ];
 
 const List = ({ bookList }) => {
-  // const [book, onSortList] = useState(bookList);
+  const [book, onSortList] = useState([]);
   // const rowNo = [...book].sort((a, b) => a.ebk_nm - b.ebk_nm);
   // const rowName = [...book].sort((a, b) => a.aut_nm - b.aut_nm);
   // const rowPbl = [...book].sort((a, b) => a.pblshr - b.pblshr);
-  // const loanOk = [...book].sort((a, b) => a.loan_avlbl_yn - b.loan_avlbl_yn);
+  const loanOk = [...bookList].sort((a, b) => a.rsvt_noppl - b.rsvt_noppl);
 
-  // const newSort = (it) => {
-  //   onSortList(it);
-  // };
+  const newSort = (it) => {
+    onSortList(it);
+  };
+
+  useEffect(() => {
+    onSortList(bookList)
+  }, [bookList])
 
   return (
     <section className="shopList pn">
@@ -78,17 +83,17 @@ const List = ({ bookList }) => {
         <li>total book : {bookList.length}</li>
         <li className="line">line</li>
         <li>
-          {/* <ul className="option">
-            <li onClick={() => newSort(rowNo)}>도서 명</li>
+          <ul className="option">
+            {/* <li onClick={() => newSort(rowNo)}>도서 명</li>
             <li onClick={() => newSort(rowName)}>저자 명</li>
-            <li onClick={() => newSort(rowPbl)}>장르 별</li>
+            <li onClick={() => newSort(rowPbl)}>장르 별</li> */}
             <li onClick={() => newSort(loanOk)}>랭킹 별</li>
-          </ul> */}
+          </ul>
         </li>
       </ul>
-
+      {console.log(book)}
       <div className="inner">
-        {bookList.map((it, idx) => {
+        {book.map((it, idx) => {
           return (
             <>
               <Link to={"/Item/" + it.no}>
@@ -98,7 +103,7 @@ const List = ({ bookList }) => {
                       src={
                         process.env.PUBLIC_URL +
                         "/assets/images/main_best0" +
-                        ((idx % PTF.length) + 1) +
+                        (it.no + 1) +
                         ".jpg"
                       }
                       alt=""
